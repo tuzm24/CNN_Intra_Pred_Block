@@ -176,7 +176,8 @@ class TuList:
         self.tulist[5][isAngularmode&(self.tulist[1]>self.tulist[0])&(self.tulist[5]>(self.VDIA_IDX-shift))] -= (self.VDIA_IDX -1)
 
         self.tulist[5][(self.tulist[5] == 0)|(self.tulist[5] == 1)] -= 16
-        self.tulist[5][(self.tulist[5] < 0)] += 16
+        self.tulist[5][(self.tulist[5] < 0)] += 2
+        self.tulist[5] += 14
         return
 
 

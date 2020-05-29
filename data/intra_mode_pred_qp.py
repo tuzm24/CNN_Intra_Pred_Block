@@ -193,14 +193,24 @@ class intra_mode_pred_qp(srdata.SRData):
         color_num = len(np.unique(img))
         cmaps = plt.cm.get_cmap('rainbow', color_num)
         cmaps.set_under('white')
-        eps = np.spacing(1.0)
+        eps = np.spacing(1.1)
 
         imgs = ax.imshow((img).astype(int), vmin=eps, vmax=vminmax[1], interpolation='nearest',
                          cmap=cmaps)
         v1 = np.round(np.linspace(vminmax[0], vminmax[1], 10, endpoint=True))
         cb = fig.colorbar(imgs, ticks=v1)
         cb.ax.set_yticklabels(["{:4.2f}".format(i) for i in v1])
-        plt.savefig('{}.png'.format(filename), dpi=300)
+        plt.savefig('{}_mode.png'.format(filename), dpi=300)
+        return
+
+    @staticmethod
+    def plotImage(img, filename):
+        fig, ax = plt.subplots()
+        img = img/1023 * 255
+
+
+        ax.imshow((img).astype(int))
+        plt.savefig('{}_org.png'.format(filename), dpi=300)
         return
 
 
@@ -209,6 +219,7 @@ class intra_mode_pred_qp(srdata.SRData):
 
         lr, hr, pos, imgshape = self.get_patch(lr, hr[0])
         # intra_mode_pred_qp.plotMap(hr, filename)
+        # intra_mode_pred_qp.plotImage(lr[0][:,:,0], filename)
         hr = hr[::4,::4,...]
         extra_data = self.getTuMask(*pos, *imgshape, filename)
         # pair = common.set_channel(*pair, n_channels=self.args.n_colors)

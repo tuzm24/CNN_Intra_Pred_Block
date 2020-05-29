@@ -104,7 +104,7 @@ class Trainer():
                     # )['LUMA'])
                     # qp = filename.split('_')[-2]
 
-                    _, _, h, w = hr.shape
+                    _, h, w = hr.shape
 
                     save_list = [sr]
                     prediction = sr.max(1)[1]
