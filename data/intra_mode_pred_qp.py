@@ -218,8 +218,8 @@ class intra_mode_pred_qp(srdata.SRData):
         lr, hr, filename = self._load_file(idx)
 
         lr, hr, pos, imgshape = self.get_patch(lr, hr[0])
-        # intra_mode_pred_qp.plotMap(hr, filename)
-        # intra_mode_pred_qp.plotImage(lr[0][:,:,0], filename)
+        intra_mode_pred_qp.plotMap(hr, filename)
+        intra_mode_pred_qp.plotImage(lr[0][:,:,0], filename)
         hr = hr[::4,::4,...]
         extra_data = self.getTuMask(*pos, *imgshape, filename)
         # pair = common.set_channel(*pair, n_channels=self.args.n_colors)
