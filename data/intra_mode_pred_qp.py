@@ -38,6 +38,8 @@ class intra_mode_pred_qp(srdata.SRData):
         names_hr = sorted(
             glob.glob(os.path.join(self.dir_hr, '*' + self.ext[0]))
         )
+        if self.args.obj_qp[0]:
+            names_hr = [hr for hr in names_hr if hr.split('_')[-2] in self.args.obj_qp]
         names_lr = [[] for _ in self.data_types]
         for f in names_hr:
             filename, _ = os.path.splitext(os.path.basename(f))
@@ -206,7 +208,7 @@ class intra_mode_pred_qp(srdata.SRData):
         lr, hr, filename = self._load_file(idx)
 
         lr, hr, pos, imgshape = self.get_patch(lr, hr[0])
-        intra_mode_pred_qp.plotMap(hr, filename)
+        # intra_mode_pred_qp.plotMap(hr, filename)
         hr = hr[::4,::4,...]
         extra_data = self.getTuMask(*pos, *imgshape, filename)
         # pair = common.set_channel(*pair, n_channels=self.args.n_colors)

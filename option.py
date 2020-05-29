@@ -19,6 +19,9 @@ parser.add_argument('--seed', type=int, default=1,
                     help='random seed')
 
 # Data specifications
+parser.add_argument('--obj_qp', type=str, default='',
+                    help='use specific qp')
+
 parser.add_argument('--dir_data', type=str, default='./Dataset/BY_PIC/Training',
                     help='dataset directory')
 parser.add_argument('--dir_demo', type=str, default='./Dataset/BY_PIC/Validation',
@@ -153,6 +156,9 @@ parser.add_argument('--save_gt', action='store_true', default=True,
 
 parser.add_argument('--exp_dir', type=str, default='', help='set experiment dir')
 
+
+
+
 args = parser.parse_args()
 template.set_template(args)
 
@@ -161,6 +167,9 @@ args.data_train = args.data_train.split('+')
 args.data_test = args.data_test.split('+')
 args.data_type = args.data_type.split('+')
 args.tu_data_type = args.tu_data_type.upper().split('+')
+
+
+args.obj_qp = args.obj_qp.split('+')
 
 
 if args.epochs == 0:

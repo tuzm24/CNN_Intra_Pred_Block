@@ -75,7 +75,8 @@ class RDN(nn.Module):
             nn.ReLU()
         ])
         self.UPNet = nn.Sequential(*[
-            nn.Conv2d(G0, 95, kSize, padding=(kSize - 1) // 2, stride=1)
+            nn.Conv2d(G0, 95, kSize, padding=(kSize - 1) // 2, stride=1),
+            nn.Softmax(dim=1)
         ])
 
 

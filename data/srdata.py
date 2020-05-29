@@ -79,6 +79,7 @@ class SRData(data.Dataset):
         names_hr = sorted(
             glob.glob(os.path.join(self.dir_hr, '*' + self.ext[0]))
         )
+
         names_lr = [[] for _ in self.data_types]
         for f in names_hr:
             filename, _ = os.path.splitext(os.path.basename(f))
