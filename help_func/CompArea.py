@@ -168,17 +168,22 @@ class TuList:
 
 
     # 0: width, 1: height, 2: x_pos 3: y_pos, 4 : qp, 5 : mode ..
-    # -14~80 mode
+    # -13~81 mode
     def setWideAngle(self):
         isAngularmode = (self.tulist[5]>self.DC_IDX)&(self.tulist[5]<=self.VDIA_IDX)
         shift = self.MODESHIFT[np.abs(self.FLOORLOG2_MAP[self.tulist[0]] - self.FLOORLOG2_MAP[self.tulist[1]])]
         self.tulist[5][isAngularmode&(self.tulist[0]>self.tulist[1])&(self.tulist[5]<(2+shift))] += (self.VDIA_IDX - 1)
         self.tulist[5][isAngularmode&(self.tulist[1]>self.tulist[0])&(self.tulist[5]>(self.VDIA_IDX-shift))] -= (self.VDIA_IDX -1)
 
-        self.tulist[5][(self.tulist[5] == 0)|(self.tulist[5] == 1)] -= 16
+        self.tulist[5][(self.tulist[5] == 0)|(self.tulist[5] == 1)] -= 15
         self.tulist[5][(self.tulist[5] < 0)] += 2
-        self.tulist[5] += 14
+        self.tulist[5] += 13
         return
+
+    # def inverseNormSetWideAngle(self):
+    #     self.tulist[5] -=14
+    #     self.tulist[5][(self.tulist[5]<2)] -= 2
+    #     self.tulist[5][(self.tulist[5]==-16)]
 
 
     @staticmethod

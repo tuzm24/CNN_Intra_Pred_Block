@@ -74,8 +74,8 @@ class RDN(nn.Module):
             nn.Conv2d(G0, G0, kSize, padding=(kSize - 1) // 2, stride=2),
             nn.ReLU()
         ])
-        self.UPNet_ = nn.Sequential(*[
-            nn.Conv2d(G0, 96, kSize, padding=(kSize - 1) // 2, stride=1)
+        self.UPNet = nn.Sequential(*[
+            nn.Conv2d(G0, 95, kSize, padding=(kSize - 1) // 2, stride=1)
         ])
 
 
@@ -92,7 +92,7 @@ class RDN(nn.Module):
         _x = self.GFF(torch.cat(RDBs_out, 1))
         # x += f__1
 
-        return self.UPNet_(_x)
+        return self.UPNet(_x)
 
 
 if __name__ == '__main__':
