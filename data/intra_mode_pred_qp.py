@@ -191,12 +191,12 @@ class intra_mode_pred_qp(srdata.SRData):
         fig, ax = plt.subplots()
 
         color_num = len(np.unique(img))
-        cmaps = plt.cm.get_cmap('rainbow', color_num)
-        cmaps.set_under('white')
-        eps = np.spacing(1.1)
+        # cmaps = plt.cm.get_cmap('rainbow', color_num)
+        # cmaps.set_under('white')
+        # eps = np.spacing(1.1)
 
-        imgs = ax.imshow((img).astype(int), vmin=eps, vmax=vminmax[1], interpolation='nearest',
-                         cmap=cmaps)
+        imgs = ax.imshow((img).astype(int), vmin=vminmax[0], vmax=vminmax[1], interpolation='nearest',
+                         cmap='rainbow')
         v1 = np.round(np.linspace(vminmax[0], vminmax[1], 10, endpoint=True))
         cb = fig.colorbar(imgs, ticks=v1)
         cb.ax.set_yticklabels(["{:4.2f}".format(i) for i in v1])
@@ -209,7 +209,7 @@ class intra_mode_pred_qp(srdata.SRData):
         img = img/1023 * 255
 
 
-        ax.imshow((img).astype(int))
+        ax.imshow((img).astype(int), cmap='gray')
         plt.savefig('{}_org.png'.format(filename), dpi=300)
         return
 
@@ -218,7 +218,8 @@ class intra_mode_pred_qp(srdata.SRData):
         lr, hr, filename = self._load_file(idx)
 
         lr, hr, pos, imgshape = self.get_patch(lr, hr[0])
-        # if self.args.cpu
+        # if self.args.cpu:
+        #
         #     intra_mode_pred_qp.plotMap(hr, filename)
         #     intra_mode_pred_qp.plotImage(lr[0][:,:,0], filename)
         hr = hr[::4,::4,...]

@@ -85,6 +85,7 @@ class TuList:
         for i, idx in enumerate(idxes):
             arr[i] = (arr[i]-TuList.TU_MEAN_MAX_DIC[idx].min_)/TuList.TU_MEAN_MAX_DIC[idx].max_
         return arr
+
     def resetMember(self):
         self.width = self.tulist[0]
         self.height = self.tulist[1]
@@ -174,17 +175,18 @@ class TuList:
         shift = self.MODESHIFT[np.abs(self.FLOORLOG2_MAP[self.tulist[0]] - self.FLOORLOG2_MAP[self.tulist[1]])]
         self.tulist[5][isAngularmode&(self.tulist[0]>self.tulist[1])&(self.tulist[5]<(2+shift))] += (self.VDIA_IDX - 1)
         self.tulist[5][isAngularmode&(self.tulist[1]>self.tulist[0])&(self.tulist[5]>(self.VDIA_IDX-shift))] -= (self.VDIA_IDX -1)
-
-        self.tulist[5][(self.tulist[5] == 0)|(self.tulist[5] == 1)] -= 15
-        self.tulist[5][(self.tulist[5] < 0)] += 2
-        self.tulist[5] += 13
+        self.tulist[5] += 12
+        #
+        # self.tulist[5][(self.tulist[5] == 0)|(self.tulist[5] == 1)] -= 15
+        # self.tulist[5][(self.tulist[5] < 0)] += 2
+        # self.tulist[5] += 13
         return
 
-    # def inverseNormSetWideAngle(self):
-    #     self.tulist[5] -=14
-    #     self.tulist[5][(self.tulist[5]<2)] -= 2
-    #     self.tulist[5][(self.tulist[5]==-16)]
-
+    def inverseNormSetWideAngle(self):
+        # self.tulist[5] -= 13
+        # self.tulist[5][(self.tulist[5]<2)] -= 2
+        # self.tulist[5][(self.tulist[5]==-15)|self.tulist[5]==-14] += 15
+        self.tulist[5] -= 12
 
     @staticmethod
     def loadTuList_Old(f):
